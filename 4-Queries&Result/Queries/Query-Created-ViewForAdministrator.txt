@@ -1,0 +1,59 @@
+Create view [AdminitrativOperations] as
+-- Query 1
+Select 'Student count with most used absence code' as AcadamicPurpose, AbsenceDesc + ' - ' + Convert(varchar(15), Value) as Result
+from
+(
+	SELECT top 1
+   [AbsenceCodeDesc] as AbsenceDesc,
+   COUNT(*) Value
+  FROM [Schools_K12_DW].[dbo].[factAbsence] fact
+  inner join [Schools_K12_DW].[dbo].[dimAbsenceCode] dim on 
+  fact.AbsenceCodeID = dim.AbsenceCodeID
+     GROUP BY [AbsenceCodeDesc]
+    ORDER BY Value desc 
+	)a
+UNION ALL
+Select 'Numper of people with max disability' as AcadamicPurpose, a.p + ' - ' + Convert(varchar(15), CountOfStudents) as Result
+from(
+SELECT top 1 count(StudentID) CountOfStudents,Program p  
+  FROM [Schools_K12_DW].[dbo].[factSpecialProgram] s
+  inner join [Schools_K12_DW].[dbo].[dimSpecialProgram] p on
+  s.ProgramID= p.ProgramID
+  group by Program 
+  Order by CountOfStudents desc)a
+UNION ALL
+ select 'Number of people with disability, in diciplinary' as AcadamicPurpose,isnull(
+ (SELECT StudentName
+     FROM [Schools_K12_DW].[dbo].[factDiscipline] d
+  inner join [Schools_K12_DW].[dbo].[dimStudent] s on
+  s.StudentID = d.StudentID 
+  inner join [Schools_K12_DW].[dbo].[factSpecialProgram] sp on
+  sp.StudentID = s.StudentID
+  inner join [Schools_K12_DW].[dbo].[dimSpecialProgram] sr on
+  sr.ProgramID = sp.ProgramID
+ where Program like 'SPECIFIC LEARNING DISABLED'),'Nothing Found') as Result
+UNION ALL
+ select 'Number of people with disability, in diciplinary' as AcadamicPurpose,isnull(
+ (SELECT StudentName
+     FROM [Schools_K12_DW].[dbo].[factDiscipline] d
+  inner join [Schools_K12_DW].[dbo].[dimStudent] s on
+  s.StudentID = d.StudentID 
+  inner join [Schools_K12_DW].[dbo].[factSpecialProgram] sp on
+  sp.StudentID = s.StudentID
+  inner join [Schools_K12_DW].[dbo].[dimSpecialProgram] sr on
+  sr.ProgramID = sp.ProgramID
+ where Program like 'GIFTED'),'Nothing Found') as Result
+ UNION ALL
+ select 'Number of people expelled from college', convert(varchar(15),count(*)) as Result from (SELECT StudentID
+  FROM [Schools_K12_DW].[dbo].dimDisciplineActionCode  f
+  inner join [Schools_K12_DW].[dbo].[factDiscipline] a on
+  a.DisciplineActionCodeID = f.DisciplineActionCodeID 
+  inner join [Schools_K12_DW].[dbo].[dimDisciplineEventCode] e on
+  e.DisciplineEventCodeID = a.DisciplineEventCodeID
+  group by StudentID)TotalNumber
+UNION ALL
+select 'Number of people adicted to adultration acts' as AcadamicPurpose,[DisciplineEventDesc]+ '-'+convert(varchar(15),count([DisciplineEventDesc])) as Result
+  FROM [Schools_K12_DW].[dbo].[dimDisciplineEventCode]  f
+  inner join [Schools_K12_DW].[dbo].factDiscipline a on
+  a.DisciplineEventCodeID = f.DisciplineEventCodeID
+  group by [DisciplineEventDesc];

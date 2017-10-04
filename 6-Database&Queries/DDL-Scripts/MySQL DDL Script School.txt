@@ -1,0 +1,736 @@
+/*
+Created: 4/25/2016
+Modified: 4/25/2016
+Model: MySQL 5.6
+Database: MySQL 5.6
+*/
+
+
+-- Create tables section -------------------------------------------------
+
+-- Table dimAbsenceCode
+
+CREATE TABLE `dimAbsenceCode`
+(
+  `AbsenceCodeID` Int NOT NULL,
+  `AbsenceCode` Varchar(10),
+  `AbsenceCodeDesc` Varchar(50),
+  `Unexcused` Varchar(20)
+)
+;
+
+ALTER TABLE `dimAbsenceCode` ADD  PRIMARY KEY (`AbsenceCodeID`)
+;
+
+-- Table dimAssignment
+
+CREATE TABLE `dimAssignment`
+(
+  `AssignmentID` Int NOT NULL,
+  `Assignment` Varchar(50)
+)
+;
+
+ALTER TABLE `dimAssignment` ADD  PRIMARY KEY (`AssignmentID`)
+;
+
+-- Table dimCourse
+
+CREATE TABLE `dimCourse`
+(
+  `CourseID` Int NOT NULL,
+  `SubjectID` Int,
+  `CourseSISID` Varchar(50),
+  `CourseTitle` Varchar(50),
+  `CourseLevel` Varchar(50)
+)
+;
+
+ALTER TABLE `dimCourse` ADD  PRIMARY KEY (`CourseID`)
+;
+
+-- Table dimDate
+
+CREATE TABLE `dimDate`
+(
+  `DatePK` Datetime(9) NOT NULL,
+  `DateName` Varchar(50),
+  `Year` Datetime(9),
+  `YearName` Varchar(50),
+  `HalfYear` Datetime(9),
+  `HalfYearName` Varchar(50),
+  `Quarter` Datetime(9),
+  `QuarterName` Varchar(50),
+  `Month` Datetime(9),
+  `MonthName` Varchar(50),
+  `Week` Datetime(9),
+  `WeekName` Varchar(50),
+  `DayOfYear` Int,
+  `DayOfYearName` Varchar(50),
+  `DayOfHalfYear` Int,
+  `DayOfHalfYearName` Varchar(50),
+  `DayOfQuarter` Int,
+  `DayOfQuarterName` Varchar(50),
+  `DayOfMonth` Int,
+  `DayOfMonthName` Varchar(50),
+  `DayOfWeek` Int,
+  `DayOfWeekName` Varchar(50),
+  `WeekOfYear` Int,
+  `WeekOfYearName` Varchar(50),
+  `MonthOfYear` Int,
+  `MonthOfYearName` Varchar(50),
+  `MonthOfHalfYear` Int,
+  `MonthOfHalfYearName` Varchar(50),
+  `MonthOfQuarter` Int,
+  `MonthOfQuarterName` Varchar(50),
+  `QuarterOfYear` Int,
+  `QuarterOfYearName` Varchar(50),
+  `QuarterOfHalfYear` Int,
+  `QuarterOfHalfYearName` Varchar(50),
+  `HalfYearOfYear` Int,
+  `HalfYearOfYearName` Varchar(50),
+  `SchoolYear` Datetime(9),
+  `SchoolYearName` Varchar(50),
+  `SchoolHalfYear` Datetime(9),
+  `SchoolHalfYearName` Varchar(50),
+  `SchoolQuarter` Datetime(9),
+  `SchoolQuarterName` Varchar(50),
+  `SchoolMonth` Datetime(9),
+  `SchoolMonthName` Varchar(50),
+  `SchoolWeek` Datetime(9),
+  `SchoolWeekName` Varchar(50),
+  `SchoolDate` Datetime(9),
+  `SchoolDayName` Varchar(50),
+  `SchoolDayOfYear` Int,
+  `SchoolDayOfYearName` Varchar(50),
+  `SchoolDayOfHalfYear` Int,
+  `SchoolDayOfHalfYearName` Varchar(50),
+  `SchoolDayOfQuarter` Int,
+  `SchoolDayOfQuarterName` Varchar(50),
+  `SchoolDayOfMonth` Int,
+  `SchoolDayOfMonthName` Varchar(50),
+  `SchoolDayOfWeek` Int,
+  `SchoolDayOfWeekName` Varchar(50),
+  `SchoolWeekOfYear` Int,
+  `SchoolWeekOfYearName` Varchar(50),
+  `SchoolMonthOfYear` Int,
+  `SchoolMonthOfYearName` Varchar(50),
+  `SchoolMonthOfHalfYear` Int,
+  `SchoolMonthOfHalfYearName` Varchar(50),
+  `SchoolMonthOfQuarter` Int,
+  `SchoolMonthOfQuarterName` Varchar(50),
+  `SchoolQuarterOfYear` Int,
+  `SchoolQuarterOfYearName` Varchar(50),
+  `SchoolQuarterOfHalfYear` Int,
+  `SchoolQuarterOfHalfYearName` Varchar(50),
+  `SchoolHalfYearOfYear` Int,
+  `SchoolHalfYearOfYearName` Varchar(50),
+  `SchoolDay` Int,
+  `SchoolNineWeeks` Int
+)
+;
+
+ALTER TABLE `dimDate` ADD  PRIMARY KEY (`DatePK`)
+;
+
+-- Table dimDisciplineActionCode
+
+CREATE TABLE `dimDisciplineActionCode`
+(
+  `DisciplineActionCodeID` Int NOT NULL,
+  `DisciplineActionCode` Varchar(10),
+  `DisciplineActionDesc` Varchar(50)
+)
+;
+
+ALTER TABLE `dimDisciplineActionCode` ADD  PRIMARY KEY (`DisciplineActionCodeID`)
+;
+
+-- Table dimDisciplineEventCode
+
+CREATE TABLE `dimDisciplineEventCode`
+(
+  `DisciplineEventCodeID` Int NOT NULL,
+  `DisciplineEventCode` Varchar(10),
+  `DisciplineEventDesc` Varchar(50)
+)
+;
+
+ALTER TABLE `dimDisciplineEventCode` ADD  PRIMARY KEY (`DisciplineEventCodeID`)
+;
+
+-- Table dimEnrollmentCode
+
+CREATE TABLE `dimEnrollmentCode`
+(
+  `EnrollmentCodeID` Int NOT NULL,
+  `EnrollmentCode` Varchar(5),
+  `EnrollmentCodeDesc` Varchar(50)
+)
+;
+
+ALTER TABLE `dimEnrollmentCode` ADD  PRIMARY KEY (`EnrollmentCodeID`)
+;
+
+-- Table dimFacility
+
+CREATE TABLE `dimFacility`
+(
+  `FacilityID` Int NOT NULL,
+  `Facility` Varchar(100),
+  `Address` Varchar(50),
+  `City` Varchar(50),
+  `Zip` Varchar(20),
+  `Active` Varchar(20),
+  `Charter` Varchar(10),
+  `FacilityADCode` Varchar(50),
+  `FacLevel` Varchar(50),
+  `FacilityName` Varchar(50),
+  `FacilityType` Varchar(50)
+)
+;
+
+ALTER TABLE `dimFacility` ADD  PRIMARY KEY (`FacilityID`)
+;
+
+-- Table dimGradeType
+
+CREATE TABLE `dimGradeType`
+(
+  `GradeTypeID` Int NOT NULL,
+  `GradeType` Varchar(50)
+)
+;
+
+ALTER TABLE `dimGradeType` ADD  PRIMARY KEY (`GradeTypeID`)
+;
+
+-- Table dimHSGTDomain
+
+CREATE TABLE `dimHSGTDomain`
+(
+  `HSGTDomainID` Int NOT NULL,
+  `HSGTDomain` Varchar(200),
+  `SubjectID` Int
+)
+;
+
+ALTER TABLE `dimHSGTDomain` ADD  PRIMARY KEY (`HSGTDomainID`)
+;
+
+-- Table dimPeriod
+
+CREATE TABLE `dimPeriod`
+(
+  `PeriodID` Int NOT NULL,
+  `Period` Varchar(20)
+)
+;
+
+ALTER TABLE `dimPeriod` ADD  PRIMARY KEY (`PeriodID`)
+;
+
+-- Table dimSpecialProgram
+
+CREATE TABLE `dimSpecialProgram`
+(
+  `ProgramID` Int NOT NULL,
+  `ProgramCode` Varchar(10),
+  `Program` Varchar(100)
+)
+;
+
+ALTER TABLE `dimSpecialProgram` ADD  PRIMARY KEY (`ProgramID`)
+;
+
+-- Table dimStaff
+
+CREATE TABLE `dimStaff`
+(
+  `StaffID` Int NOT NULL,
+  `StaffTypeID` Int,
+  `PrimaryFacilityID` Int,
+  `StaffFirstName` Varchar(50),
+  `StaffLastName` Varchar(50),
+  `StaffName` Varchar(100),
+  `StaffADUsername` Varchar(50),
+  `GradeLevel` Varchar(50)
+)
+;
+
+ALTER TABLE `dimStaff` ADD  PRIMARY KEY (`StaffID`)
+;
+
+-- Table dimStandardizedTestDomain
+
+CREATE TABLE `dimStandardizedTestDomain`
+(
+  `StandardizedTestDomainID` Int NOT NULL,
+  `StandardizedTestDomain` Varchar(50),
+  `SubjectID` Int
+)
+;
+
+ALTER TABLE `dimStandardizedTestDomain` ADD  PRIMARY KEY (`StandardizedTestDomainID`)
+;
+
+-- Table dimStudent
+
+CREATE TABLE `dimStudent`
+(
+  `StudentID` Int NOT NULL,
+  `SISStudentID` Int,
+  `StudentName` Varchar(100),
+  `StudentFirstName` Varchar(50),
+  `StudentLastName` Varchar(50),
+  `BirthDate` Datetime(9),
+  `Gender` Varchar(10),
+  `EthnicityCode` Varchar(5),
+  `Ethnicity` Varchar(50),
+  `ESOL` Varchar(5),
+  `FreeReducedLunch` Varchar(10),
+  `HomeroomStaffID` Int,
+  `FacilityID` Int,
+  `Grade` Varchar(5),
+  `AssignmentID` Int,
+  `EnrollmentCodeID` Int,
+  `EnrollmentDate` Datetime(9),
+  `WithdrawalCodeID` Int,
+  `WithdrawalDate` Datetime(9),
+  `EffectiveDate` Datetime(9) NOT NULL,
+  `EndDate` Datetime(9) NOT NULL,
+  `StudentMiddleName` Varchar(50),
+  `StudentNameSuffix` Varchar(50),
+  `StudentPhone` Varchar(50),
+  `StudentSSN` Varchar(50),
+  `Address1` Varchar(50),
+  `City` Varchar(50),
+  `State` Varchar(50),
+  `Zip` Varchar(50),
+  `AdultEmploymentStatus` Varchar(20),
+  `AdultLEP` Varchar(20),
+  `AttendancePeriodID` Int,
+  `AudiologyServiceEarlyIntervention` Varchar(50),
+  `BirthCountry` Varchar(50),
+  `BirthPlace` Varchar(50),
+  `BirthState` Varchar(50),
+  `CitizenshipStatus` Varchar(20),
+  `EarlyAdmission` Varchar(50),
+  `EconomicDisadvantage` Varchar(50),
+  `ELLCode` Varchar(20),
+  `ELLCodeDesc` Varchar(50),
+  `FederalImpactCode` Varchar(20),
+  `FederalImpactCodeDesc` Varchar(50),
+  `GiftedStudent` Varchar(50),
+  `GraduationPlanYear` Varchar(10),
+  `GraduationOption` Varchar(50),
+  `HomeLanguage` Varchar(50),
+  `HomelessStudent` Varchar(50),
+  `HomelessUnaccompaniedYouth` Varchar(50),
+  `Homeroom` Varchar(50),
+  `HomeSchoolTaught` Varchar(50),
+  `HouseholdNumber` Varchar(10),
+  `IncarceratedStudent` Varchar(50),
+  `KGReadiness` Varchar(50),
+  `MaritalStatus` Varchar(10),
+  `MedicaidSpecServices` Varchar(50),
+  `MedicalServEarlyIntervention` Varchar(50),
+  `MigrantStatus` Varchar(50),
+  `MissingChild` Varchar(50),
+  `NationalAchieveScholar` Varchar(10),
+  `NationalHispanicScholar` Varchar(10),
+  `NationalMeritScholar` Varchar(10),
+  `EarlyIntervention` Varchar(50),
+  `EarlyExceptionalities` Varchar(50),
+  `OutOfDistrict` Varchar(10),
+  `Exceptionality` Varchar(50),
+  `PrimaryLanguage` Varchar(50),
+  `ResidentStatus` Varchar(10),
+  `SecondLanguage` Varchar(50),
+  `RefID` Int,
+  `oldSID` Int,
+  `SchoolYear` Int,
+  `WithdrawalFlag` Int
+)
+;
+
+ALTER TABLE `dimStudent` ADD  PRIMARY KEY (`StudentID`)
+;
+
+-- Table dimSubject
+
+CREATE TABLE `dimSubject`
+(
+  `SubjectID` Int NOT NULL,
+  `SubjectCode` Varchar(50),
+  `SubjectName` Varchar(200)
+)
+;
+
+ALTER TABLE `dimSubject` ADD  PRIMARY KEY (`SubjectID`)
+;
+
+-- Table dimWithdrawalCode
+
+CREATE TABLE `dimWithdrawalCode`
+(
+  `WithdrawalCodeID` Int NOT NULL,
+  `WithdrawalCode` Varchar(5),
+  `WithdrawalCodeDesc` Varchar(50)
+)
+;
+
+ALTER TABLE `dimWithdrawalCode` ADD  PRIMARY KEY (`WithdrawalCodeID`)
+;
+
+-- Table factAbsence
+
+CREATE TABLE `factAbsence`
+(
+  `AbsenceID` Int NOT NULL,
+  `AbsenceDate` Datetime(9),
+  `StudentID` Int,
+  `SISStudentID` Int,
+  `AbsenceCodeID` Int,
+  `AbsenceCount` Int,
+  `FacilityID` Int,
+  `StaffID` Int
+)
+;
+
+ALTER TABLE `factAbsence` ADD  PRIMARY KEY (`AbsenceID`)
+;
+
+-- Table factDiscipline
+
+CREATE TABLE `factDiscipline`
+(
+  `DisciplineID` Int NOT NULL,
+  `StudentID` Int,
+  `SISStudentID` Int,
+  `EventFacilityID` Int,
+  `DisciplineEventCodeID` Int,
+  `EventDate` Datetime(9),
+  `EventReportingStaffID` Int,
+  `DisciplineActionCodeID` Int,
+  `ActionDate` Datetime(9),
+  `ActionStaffID` Int,
+  `ResolutionDate` Datetime(9)
+)
+;
+
+ALTER TABLE `factDiscipline` ADD  PRIMARY KEY (`DisciplineID`)
+;
+
+-- Table factHSGTDomainScore
+
+CREATE TABLE `factHSGTDomainScore`
+(
+  `HSGTDomainScoreID` Int NOT NULL,
+  `HSGTScoreID` Int NOT NULL,
+  `HSGTDomainID` Int NOT NULL,
+  `DomainRawScore` Decimal(10,2),
+  `PossibleDomainRawScore` Decimal(10,2)
+)
+;
+
+ALTER TABLE `factHSGTDomainScore` ADD  PRIMARY KEY (`HSGTDomainScoreID`)
+;
+
+-- Table factHSGTScore
+
+CREATE TABLE `factHSGTScore`
+(
+  `HSGTScoreID` Int NOT NULL,
+  `StudentID` Int NOT NULL,
+  `SISStudentID` Int,
+  `TestDate` Datetime(9),
+  `SubjectID` Int,
+  `RawScore` Decimal(10,2),
+  `PossibleRawScore` Decimal(10,2),
+  `ScaledScore` Decimal(10,2),
+  `PossibleScaledScore` Decimal(10,2),
+  `PassFail` Varchar(50),
+  `TimesTested` Int,
+  `LatestTest` Int
+)
+;
+
+ALTER TABLE `factHSGTScore` ADD  PRIMARY KEY (`HSGTScoreID`)
+;
+
+-- Table factSchoolKPI
+
+CREATE TABLE `factSchoolKPI`
+(
+  `SchoolKPIID` Int NOT NULL,
+  `EffectiveDate` Datetime(9) NOT NULL,
+  `FacilityID` Int NOT NULL,
+  `TargetStudentAttendancePct` Int NOT NULL,
+  `TargetStandardizedTestScaledScore` Int NOT NULL,
+  `TargetEnrollmentCount` Int NOT NULL
+)
+;
+
+ALTER TABLE `factSchoolKPI` ADD  PRIMARY KEY (`SchoolKPIID`)
+;
+
+-- Table factSpecialProgram
+
+CREATE TABLE `factSpecialProgram`
+(
+  `SpecialProgramID` Int NOT NULL,
+  `ProgramID` Int,
+  `StudentID` Int,
+  `SISStudentID` Int,
+  `EntryDate` Datetime(9)
+)
+;
+
+ALTER TABLE `factSpecialProgram` ADD  PRIMARY KEY (`SpecialProgramID`)
+;
+
+-- Table factStandardizedTestDomainScore
+
+CREATE TABLE `factStandardizedTestDomainScore`
+(
+  `StandardizedTestDomainScoreID` Int NOT NULL,
+  `StandardizedTestScoreID` Int,
+  `StandardizedTestDomainID` Int,
+  `RawScore` Decimal(10,2),
+  `PossibleRawScore` Decimal(10,2)
+)
+;
+
+ALTER TABLE `factStandardizedTestDomainScore` ADD  PRIMARY KEY (`StandardizedTestDomainScoreID`)
+;
+
+-- Table factStandardizedTestScore
+
+CREATE TABLE `factStandardizedTestScore`
+(
+  `StandardizedTestScoreID` Int NOT NULL,
+  `StudentID` Int,
+  `SISStudentID` Int,
+  `TestDate` Datetime(9),
+  `SubjectID` Int,
+  `RawScore` Decimal(10,2),
+  `PossibleRawScore` Decimal(10,2),
+  `ScaledScore` Decimal(10,2),
+  `PossibleScaledScore` Decimal(10,2),
+  `PerformanceLevel` Decimal(10,2),
+  `Lexile` Varchar(50),
+  `LatestTest` Int
+)
+;
+
+ALTER TABLE `factStandardizedTestScore` ADD  PRIMARY KEY (`StandardizedTestScoreID`)
+;
+
+-- Table factStudentCourse
+
+CREATE TABLE `factStudentCourse`
+(
+  `StudentCourseID` Int NOT NULL,
+  `StudentID` Int,
+  `SISStudentID` Int,
+  `CourseID` Int,
+  `StaffID` Int,
+  `FacilityID` Int,
+  `PeriodID` Int,
+  `CourseDate` Datetime(9),
+  `EnrollmentDate` Datetime(9),
+  `EnrollmentCodeID` Int,
+  `WithdrawalDate` Datetime(9),
+  `WithdrawalCodeID` Int,
+  `GradeLevel` Varchar(10)
+)
+;
+
+ALTER TABLE `factStudentCourse` ADD  PRIMARY KEY (`StudentCourseID`)
+;
+
+-- Table factStudentCourseGrade
+
+CREATE TABLE `factStudentCourseGrade`
+(
+  `StudentCourseGradeID` Int NOT NULL,
+  `StudentCourseID` Int,
+  `GradeTypeID` Int,
+  `CreditAttempted` Decimal(10,2),
+  `CreditGiven` Decimal(10,2),
+  `NumericGrade` Decimal(10,2),
+  `AlphaGrade` Varchar(5),
+  `AlphaNumericGrade` Decimal(10,2)
+)
+;
+
+ALTER TABLE `factStudentCourseGrade` ADD  PRIMARY KEY (`StudentCourseGradeID`)
+;
+
+-- Table tempStaffSubject
+
+CREATE TABLE `tempStaffSubject`
+(
+  `SubjectID` Int NOT NULL,
+  `StaffID` Int NOT NULL
+)
+;
+
+-- Create relationships section ------------------------------------------------- 
+
+ALTER TABLE `dimCourse` ADD CONSTRAINT `dimSubject_dimCourse_FK1` FOREIGN KEY (`SubjectID`) REFERENCES `dimSubject` (`SubjectID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `dimStaff` ADD CONSTRAINT `dimFacility_dimStaff_FK1` FOREIGN KEY (`PrimaryFacilityID`) REFERENCES `dimFacility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `dimStandardizedTestDomain` ADD CONSTRAINT `dimSubject_dimStandardizedTestDomain_FK1` FOREIGN KEY (`SubjectID`) REFERENCES `dimSubject` (`SubjectID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `dimStudent` ADD CONSTRAINT `dimAssignment_dimStudent_FK1` FOREIGN KEY (`AssignmentID`) REFERENCES `dimAssignment` (`AssignmentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `dimStudent` ADD CONSTRAINT `dimDate_dimStudent_FK1` FOREIGN KEY (`EnrollmentDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `dimStudent` ADD CONSTRAINT `dimDate_dimStudent_FK2` FOREIGN KEY (`WithdrawalDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `dimStudent` ADD CONSTRAINT `dimDate_dimStudent_FK3` FOREIGN KEY (`BirthDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `dimStudent` ADD CONSTRAINT `dimEnrollmentCode_dimStudent_FK1` FOREIGN KEY (`EnrollmentCodeID`) REFERENCES `dimEnrollmentCode` (`EnrollmentCodeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `dimStudent` ADD CONSTRAINT `dimFacility_dimStudent_FK1` FOREIGN KEY (`FacilityID`) REFERENCES `dimFacility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `dimStudent` ADD CONSTRAINT `dimStaff_dimStudent_FK1` FOREIGN KEY (`HomeroomStaffID`) REFERENCES `dimStaff` (`StaffID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `dimStudent` ADD CONSTRAINT `dimWithdrawalCode_dimStudent_FK1` FOREIGN KEY (`WithdrawalCodeID`) REFERENCES `dimWithdrawalCode` (`WithdrawalCodeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factAbsence` ADD CONSTRAINT `dimAbsenceCode_factAbsence_FK1` FOREIGN KEY (`AbsenceCodeID`) REFERENCES `dimAbsenceCode` (`AbsenceCodeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factAbsence` ADD CONSTRAINT `dimDate_factAbsence_FK1` FOREIGN KEY (`AbsenceDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factAbsence` ADD CONSTRAINT `dimFacility_factAbsence_FK1` FOREIGN KEY (`FacilityID`) REFERENCES `dimFacility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factAbsence` ADD CONSTRAINT `dimStaff_factAbsence_FK1` FOREIGN KEY (`StaffID`) REFERENCES `dimStaff` (`StaffID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factAbsence` ADD CONSTRAINT `dimStudent_factAbsence_FK1` FOREIGN KEY (`StudentID`) REFERENCES `dimStudent` (`StudentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factDiscipline` ADD CONSTRAINT `dimDate_factDiscipline_FK1` FOREIGN KEY (`EventDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factDiscipline` ADD CONSTRAINT `dimDate_factDiscipline_FK2` FOREIGN KEY (`ActionDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factDiscipline` ADD CONSTRAINT `dimDate_factDiscipline_FK3` FOREIGN KEY (`ResolutionDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factDiscipline` ADD CONSTRAINT `dimDisciplineActionCode_factDiscipline_FK1` FOREIGN KEY (`DisciplineActionCodeID`) REFERENCES `dimDisciplineActionCode` (`DisciplineActionCodeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factDiscipline` ADD CONSTRAINT `dimDisciplineEventCode_factDiscipline_FK1` FOREIGN KEY (`DisciplineEventCodeID`) REFERENCES `dimDisciplineEventCode` (`DisciplineEventCodeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factDiscipline` ADD CONSTRAINT `dimFacility_factDiscipline_FK1` FOREIGN KEY (`EventFacilityID`) REFERENCES `dimFacility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factDiscipline` ADD CONSTRAINT `dimStaff_factDiscipline_FK1` FOREIGN KEY (`EventReportingStaffID`) REFERENCES `dimStaff` (`StaffID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factDiscipline` ADD CONSTRAINT `dimStaff_factDiscipline_FK2` FOREIGN KEY (`ActionStaffID`) REFERENCES `dimStaff` (`StaffID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factDiscipline` ADD CONSTRAINT `dimStudent_factDiscipline_FK1` FOREIGN KEY (`StudentID`) REFERENCES `dimStudent` (`StudentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factHSGTDomainScore` ADD CONSTRAINT `FK_factHSGTDomainScore_dimHSGTDomain` FOREIGN KEY (`HSGTDomainID`) REFERENCES `dimHSGTDomain` (`HSGTDomainID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factHSGTDomainScore` ADD CONSTRAINT `FK_factHSGTDomainScore_factHSGTScore` FOREIGN KEY (`HSGTScoreID`) REFERENCES `factHSGTScore` (`HSGTScoreID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factHSGTScore` ADD CONSTRAINT `FK_factHSGTScore_dimDate` FOREIGN KEY (`TestDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factHSGTScore` ADD CONSTRAINT `FK_factHSGTScore_dimStudent` FOREIGN KEY (`StudentID`) REFERENCES `dimStudent` (`StudentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factHSGTScore` ADD CONSTRAINT `FK_factHSGTScore_dimSubject` FOREIGN KEY (`SubjectID`) REFERENCES `dimSubject` (`SubjectID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factSchoolKPI` ADD CONSTRAINT `FK_factSchoolKPI_dimDate` FOREIGN KEY (`EffectiveDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factSchoolKPI` ADD CONSTRAINT `FK_factSchoolKPI_dimFacility` FOREIGN KEY (`FacilityID`) REFERENCES `dimFacility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factSpecialProgram` ADD CONSTRAINT `dimDate_factSpecialProgram_FK1` FOREIGN KEY (`EntryDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factSpecialProgram` ADD CONSTRAINT `dimSpecialProgram_factSpecialProgram_FK1` FOREIGN KEY (`ProgramID`) REFERENCES `dimSpecialProgram` (`ProgramID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factSpecialProgram` ADD CONSTRAINT `dimStudent_factSpecialProgram_FK1` FOREIGN KEY (`StudentID`) REFERENCES `dimStudent` (`StudentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStandardizedTestDomainScore` ADD CONSTRAINT `dimStandardizedTestDomain_factStandardizedTestDomainScore_FK1` FOREIGN KEY (`StandardizedTestDomainID`) REFERENCES `dimStandardizedTestDomain` (`StandardizedTestDomainID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStandardizedTestDomainScore` ADD CONSTRAINT `factStandardizedTestScore_factStandardizedTestDomainScore_FK1` FOREIGN KEY (`StandardizedTestScoreID`) REFERENCES `factStandardizedTestScore` (`StandardizedTestScoreID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStandardizedTestScore` ADD CONSTRAINT `dimDate_factStandardizedTestScore_FK1` FOREIGN KEY (`TestDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStandardizedTestScore` ADD CONSTRAINT `dimStudent_factStandardizedTestScore_FK1` FOREIGN KEY (`StudentID`) REFERENCES `dimStudent` (`StudentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStandardizedTestScore` ADD CONSTRAINT `dimSubject_factStandardizedTestScore_FK1` FOREIGN KEY (`SubjectID`) REFERENCES `dimSubject` (`SubjectID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourse` ADD CONSTRAINT `dimCourse_factStudentCourse_FK1` FOREIGN KEY (`CourseID`) REFERENCES `dimCourse` (`CourseID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourse` ADD CONSTRAINT `dimDate_factStudentCourse_FK1` FOREIGN KEY (`CourseDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourse` ADD CONSTRAINT `dimDate_factStudentCourse_FK2` FOREIGN KEY (`EnrollmentDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourse` ADD CONSTRAINT `dimDate_factStudentCourse_FK3` FOREIGN KEY (`WithdrawalDate`) REFERENCES `dimDate` (`DatePK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourse` ADD CONSTRAINT `dimEnrollmentCode_factStudentCourse_FK1` FOREIGN KEY (`EnrollmentCodeID`) REFERENCES `dimEnrollmentCode` (`EnrollmentCodeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourse` ADD CONSTRAINT `dimFacility_factStudentCourse_FK1` FOREIGN KEY (`FacilityID`) REFERENCES `dimFacility` (`FacilityID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourse` ADD CONSTRAINT `dimPeriod_factStudentCourse_FK1` FOREIGN KEY (`PeriodID`) REFERENCES `dimPeriod` (`PeriodID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourse` ADD CONSTRAINT `dimStaff_factStudentCourse_FK1` FOREIGN KEY (`StaffID`) REFERENCES `dimStaff` (`StaffID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourse` ADD CONSTRAINT `dimStudent_factStudentCourse_FK1` FOREIGN KEY (`StudentID`) REFERENCES `dimStudent` (`StudentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourse` ADD CONSTRAINT `dimWithdrawalCode_factStudentCourse_FK1` FOREIGN KEY (`WithdrawalCodeID`) REFERENCES `dimWithdrawalCode` (`WithdrawalCodeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourseGrade` ADD CONSTRAINT `dimGradeType_factStudentCourseGrade_FK1` FOREIGN KEY (`GradeTypeID`) REFERENCES `dimGradeType` (`GradeTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;
+
+ALTER TABLE `factStudentCourseGrade` ADD CONSTRAINT `factStudentCourse_factStudentCourseGrade_FK1` FOREIGN KEY (`StudentCourseID`) REFERENCES `factStudentCourse` (`StudentCourseID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+;

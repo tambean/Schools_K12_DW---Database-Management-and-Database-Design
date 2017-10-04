@@ -1,0 +1,424 @@
+/*
+Created: 4/25/2016
+Modified: 4/25/2016
+Model: PostgreSQL 9.3
+Database: PostgreSQL 9.3
+*/
+
+
+-- Create tables section -------------------------------------------------
+
+-- Table dimAbsenceCode
+CREATE TABLE dimAbsenceCode(
+    AbsenceCodeID int NOT NULL,
+    AbsenceCode varchar(10) NULL,
+    AbsenceCodeDesc varchar(50) NULL,
+    Unexcused varchar(20) NULL,
+    PRIMARY KEY (AbsenceCodeID)
+    );
+
+    CREATE TABLE dimAssignment(
+    AssignmentID int NOT NULL,
+    Assignment varchar(50) NULL,
+    PRIMARY KEY (AssignmentID)
+    );
+
+    CREATE TABLE dimCourse(
+    CourseID int NOT NULL,
+    SubjectID int NULL,
+    CourseSISID varchar(50) NULL,
+    CourseTitle varchar(50) NULL,
+    CourseLevel varchar(50) NULL,
+    PRIMARY KEY (CourseID)
+    );
+
+       CREATE TABLE dimDisciplineActionCode(
+    DisciplineActionCodeID int NOT NULL,
+    DisciplineActionCode varchar(10) NULL,
+    DisciplineActionDesc varchar(50) NULL,
+    PRIMARY KEY (DisciplineActionCodeID)
+    );
+
+
+        CREATE TABLE dimDisciplineEventCode(
+    DisciplineEventCodeID int NOT NULL,
+    DisciplineEventCode varchar(10) NULL,
+    DisciplineEventDesc varchar(50) NULL,
+    PRIMARY KEY (DisciplineEventCodeID)
+    );
+
+
+CREATE TABLE dimEnrollmentCode(
+    EnrollmentCodeID int NOT NULL,
+    EnrollmentCode varchar(5) NULL,
+    EnrollmentCodeDesc varchar(50) NULL,
+    PRIMARY KEY (EnrollmentCodeID)
+    );
+
+CREATE TABLE dimFacility(
+    FacilityID int NOT NULL,
+    Facility varchar(100) NULL,
+    Address varchar(50) NULL,
+    City varchar(50) NULL,
+    Zip varchar(20) NULL,
+    Active varchar(20) NULL,
+    Charter varchar(10) NULL,
+    FacilityADCode varchar(50) NULL,
+    FacLevel varchar(50) NULL,
+    FacilityName varchar(50) NULL,
+    FacilityType varchar(50) NULL,
+    PRIMARY KEY (FacilityID)
+    );
+
+
+
+    CREATE TABLE dimGradeType(
+    GradeTypeID int NOT NULL,
+    GradeType varchar(50) NULL,
+    PRIMARY KEY (GradeTypeID)
+    );
+CREATE TABLE dimHSGTDomain(
+    HSGTDomainID int NOT NULL,
+    HSGTDomain varchar(200) NULL,
+    SubjectID int NULL,
+    PRIMARY KEY (HSGTDomainID)
+    );
+CREATE TABLE dimPeriod(
+    PeriodID int NOT NULL,
+    Period varchar(20) NULL,
+    PRIMARY KEY (PeriodID)
+    );
+CREATE TABLE dimSpecialProgram(
+    ProgramID int NOT NULL,
+    ProgramCode varchar(10) NULL,
+    Program varchar(100) NULL,
+    PRIMARY KEY (ProgramID)
+    );
+CREATE TABLE dimStaff(
+    StaffID int NOT NULL,
+    StaffTypeID int NULL,
+    PrimaryFacilityID int NULL,
+    StaffFirstName varchar(50) NULL,
+    StaffLastName varchar(50) NULL,
+    StaffName varchar(100) NULL,
+    StaffADUsername varchar(50) NULL,
+    GradeLevel varchar(50) NULL,
+    PRIMARY KEY (StaffID)
+    );
+CREATE TABLE dimStandardizedTestDomain(
+    StandardizedTestDomainID int NOT NULL,
+    StandardizedTestDomain varchar(50) NULL,
+    SubjectID int NULL,
+    PRIMARY KEY (StandardizedTestDomainID)
+    );
+CREATE TABLE dimSubject(
+    SubjectID int NOT NULL,
+    SubjectCode varchar(50) NULL,
+    SubjectName varchar(200) NULL,
+    PRIMARY KEY (SubjectID)
+    );
+CREATE TABLE dimWithdrawalCode(
+    WithdrawalCodeID int NOT NULL,
+    WithdrawalCode varchar(5) NULL,
+    WithdrawalCodeDesc varchar(50) NULL,
+    PRIMARY KEY (WithdrawalCodeID)
+    );
+
+
+
+CREATE TABLE factHSGTDomainScore(
+    HSGTDomainScoreID int NOT NULL,
+    HSGTScoreID int NOT NULL,
+    HSGTDomainID int NOT NULL,
+    DomainRawScore numeric(10, 2) NULL,
+    PossibleDomainRawScore numeric(10, 2) NULL,
+    PRIMARY KEY (HSGTDomainScoreID)
+    );
+
+
+
+CREATE TABLE factStandardizedTestDomainScore(
+    StandardizedTestDomainScoreID int NOT NULL,
+    StandardizedTestScoreID int NULL,
+    StandardizedTestDomainID int NULL,
+    RawScore numeric(10, 2) NULL,
+    PossibleRawScore numeric(10, 2) NULL,
+    PRIMARY KEY (StandardizedTestDomainScoreID)
+    );
+
+
+CREATE TABLE factStudentCourseGrade(
+    StudentCourseGradeID int NOT NULL,
+    StudentCourseID int NULL,
+    GradeTypeID int NULL,
+    CreditAttempted numeric(10, 2) NULL,
+    CreditGiven numeric(10, 2) NULL,
+    NumericGrade numeric(10, 2) NULL,
+    AlphaGrade varchar(5) NULL,
+    AlphaNumericGrade numeric(10, 2) NULL,
+    PRIMARY KEY (StudentCourseGradeID)
+    );
+CREATE TABLE tempStaffSubject(
+    SubjectID int NOT NULL,
+    StaffID int NOT NULL
+);
+
+CREATE TABLE dimDate(
+    DatePK timestamp NOT NULL,
+    DateName varchar(50) NULL,
+    Year timestamp NULL,
+    YearName varchar(50) NULL,
+    HalfYear timestamp NULL,
+    HalfYearName varchar(50) NULL,
+    Quarter timestamp NULL,
+    QuarterName varchar(50) NULL,
+    Month timestamp NULL,
+    MonthName varchar(50) NULL,
+    Week timestamp NULL,
+    WeekName varchar(50) NULL,
+    DayOfYear int NULL,
+    DayOfYearName varchar(50) NULL,
+    DayOfHalfYear int NULL,
+    DayOfHalfYearName varchar(50) NULL,
+    DayOfQuarter int NULL,
+    DayOfQuarterName varchar(50) NULL,
+    DayOfMonth int NULL,
+    DayOfMonthName varchar(50) NULL,
+    DayOfWeek int NULL,
+    DayOfWeekName varchar(50) NULL,
+    WeekOfYear int NULL,
+    WeekOfYearName varchar(50) NULL,
+    MonthOfYear int NULL,
+    MonthOfYearName varchar(50) NULL,
+    MonthOfHalfYear int NULL,
+    MonthOfHalfYearName varchar(50) NULL,
+    MonthOfQuarter int NULL,
+    MonthOfQuarterName varchar(50) NULL,
+    QuarterOfYear int NULL,
+    QuarterOfYearName varchar(50) NULL,
+    QuarterOfHalfYear int NULL,
+    QuarterOfHalfYearName varchar(50) NULL,
+    HalfYearOfYear int NULL,
+    HalfYearOfYearName varchar(50) NULL,
+    SchoolYear timestamp NULL,
+    SchoolYearName varchar(50) NULL,
+    SchoolHalfYear timestamp NULL,
+    SchoolHalfYearName varchar(50) NULL,
+    SchoolQuarter timestamp NULL,
+    SchoolQuarterName varchar(50) NULL,
+    SchoolMonth timestamp NULL,
+    SchoolMonthName varchar(50) NULL,
+    SchoolWeek timestamp NULL,
+    SchoolWeekName varchar(50) NULL,
+    SchoolDate timestamp NULL,
+    SchoolDayName varchar(50) NULL,
+    SchoolDayOfYear int NULL,
+    SchoolDayOfYearName varchar(50) NULL,
+    SchoolDayOfHalfYear int NULL,
+    SchoolDayOfHalfYearName varchar(50) NULL,
+    SchoolDayOfQuarter int NULL,
+    SchoolDayOfQuarterName varchar(50) NULL,
+    SchoolDayOfMonth int NULL,
+    SchoolDayOfMonthName varchar(50) NULL,
+    SchoolDayOfWeek int NULL,
+    SchoolDayOfWeekName varchar(50) NULL,
+    SchoolWeekOfYear int NULL,
+    SchoolWeekOfYearName varchar(50) NULL,
+    SchoolMonthOfYear int NULL,
+    SchoolMonthOfYearName varchar(50) NULL,
+    SchoolMonthOfHalfYear int NULL,
+    SchoolMonthOfHalfYearName varchar(50) NULL,
+    SchoolMonthOfQuarter int NULL,
+    SchoolMonthOfQuarterName varchar(50) NULL,
+    SchoolQuarterOfYear int NULL,
+    SchoolQuarterOfYearName varchar(50) NULL,
+    SchoolQuarterOfHalfYear int NULL,
+    SchoolQuarterOfHalfYearName varchar(50) NULL,
+    SchoolHalfYearOfYear int NULL,
+    SchoolHalfYearOfYearName varchar(50) NULL,
+    SchoolDay int NULL,
+    SchoolNineWeeks int NULL,
+    PRIMARY KEY (DatePK)
+    );
+
+   
+   
+    CREATE TABLE dimStudent(
+    StudentID int NOT NULL,
+    SISStudentID int NULL,
+    StudentName varchar(100) NULL,
+    StudentFirstName varchar(50) NULL,
+    StudentLastName varchar(50) NULL,
+    BirthDate timestamp NULL,
+    Gender varchar(10) NULL,
+    EthnicityCode varchar(5) NULL,
+    Ethnicity varchar(50) NULL,
+    ESOL varchar(5) NULL,
+    FreeReducedLunch varchar(10) NULL,
+    HomeroomStaffID int NULL,
+    FacilityID int NULL,
+    Grade varchar(5) NULL,
+    AssignmentID int NULL,
+    EnrollmentCodeID int NULL,
+    EnrollmentDate timestamp NULL,
+    WithdrawalCodeID int NULL,
+    WithdrawalDate timestamp NULL,
+    EffectiveDate timestamp NOT NULL,
+    EndDate timestamp NOT NULL,
+    StudentMiddleName varchar(50) NULL,
+    StudentNameSuffix varchar(50) NULL,
+    StudentPhone varchar(50) NULL,
+    StudentSSN varchar(50) NULL,
+    Address1 varchar(50) NULL,
+    City varchar(50) NULL,
+    State varchar(50) NULL,
+    Zip varchar(50) NULL,
+    AdultEmploymentStatus varchar(20) NULL,
+    AdultLEP varchar(20) NULL,
+    AttendancePeriodID int NULL,
+    AudiologyServiceEarlyIntervention varchar(50) NULL,
+    BirthCountry varchar(50) NULL,
+    BirthPlace varchar(50) NULL,
+    BirthState varchar(50) NULL,
+    CitizenshipStatus varchar(20) NULL,
+    EarlyAdmission varchar(50) NULL,
+    EconomicDisadvantage varchar(50) NULL,
+    ELLCode varchar(20) NULL,
+    ELLCodeDesc varchar(50) NULL,
+    FederalImpactCode varchar(20) NULL,
+    FederalImpactCodeDesc varchar(50) NULL,
+    GiftedStudent varchar(50) NULL,
+    GraduationPlanYear varchar(10) NULL,
+    GraduationOption varchar(50) NULL,
+    HomeLanguage varchar(50) NULL,
+    HomelessStudent varchar(50) NULL,
+    HomelessUnaccompaniedYouth varchar(50) NULL,
+    Homeroom varchar(50) NULL,
+    HomeSchoolTaught varchar(50) NULL,
+    HouseholdNumber varchar(10) NULL,
+    IncarceratedStudent varchar(50) NULL,
+    KGReadiness varchar(50) NULL,
+    MaritalStatus varchar(10) NULL,
+    MedicaidSpecServices varchar(50) NULL,
+    MedicalServEarlyIntervention varchar(50) NULL,
+    MigrantStatus varchar(50) NULL,
+    MissingChild varchar(50) NULL,
+    NationalAchieveScholar varchar(10) NULL,
+    NationalHispanicScholar varchar(10) NULL,
+    NationalMeritScholar varchar(10) NULL,
+    EarlyIntervention varchar(50) NULL,
+    EarlyExceptionalities varchar(50) NULL,
+    OutOfDistrict varchar(10) NULL,
+    Exceptionality varchar(50) NULL,
+    PrimaryLanguage varchar(50) NULL,
+    ResidentStatus varchar(10) NULL,
+    SecondLanguage varchar(50) NULL,
+    RefID int NULL,
+    oldSID int NULL,
+    SchoolYear int NULL,
+    WithdrawalFlag int NULL,
+    PRIMARY KEY (StudentID)
+    );
+
+    CREATE TABLE factAbsence(
+    AbsenceID int NOT NULL,
+    AbsenceDate timestamp NULL,
+    StudentID int NULL,
+    SISStudentID int NULL,
+    AbsenceCodeID int NULL,
+    AbsenceCount int NULL,
+    FacilityID int NULL,
+    StaffID int NULL,
+    PRIMARY KEY (AbsenceID)
+    );
+   
+   
+   
+    CREATE TABLE factHSGTScore(
+    HSGTScoreID int NOT NULL,
+    StudentID int NOT NULL,
+    SISStudentID int NULL,
+    TestDate timestamp NULL,
+    SubjectID int NULL,
+    RawScore numeric(10, 2) NULL,
+    PossibleRawScore numeric(10, 2) NULL,
+    ScaledScore numeric(10, 2) NULL,
+    PossibleScaledScore numeric(10, 2) NULL,
+    PassFail varchar(50) NULL,
+    TimesTested int NULL,
+    LatestTest int NULL,
+    PRIMARY KEY (HSGTScoreID)
+    );
+
+   
+   
+    CREATE TABLE factDiscipline(
+    DisciplineID int NOT NULL,
+    StudentID int NULL,
+    SISStudentID int NULL,
+    EventFacilityID int NULL,
+    DisciplineEventCodeID int NULL,
+    EventDate timestamp NULL,
+    EventReportingStaffID int NULL,
+    DisciplineActionCodeID int NULL,
+    ActionDate timestamp NULL,
+    ActionStaffID int NULL,
+    ResolutionDate timestamp NULL,
+    PRIMARY KEY (DisciplineID)
+    );
+   
+   
+    CREATE TABLE factSchoolKPI(
+    SchoolKPIID int NOT NULL,
+    EffectiveDate timestamp NOT NULL,
+    FacilityID int NOT NULL,
+    TargetStudentAttendancePct int NOT NULL,
+    TargetStandardizedTestScaledScore int NOT NULL,
+    TargetEnrollmentCount int NOT NULL,
+    PRIMARY KEY (SchoolKPIID)
+    );
+
+   
+    CREATE TABLE factSpecialProgram(
+    SpecialProgramID int NOT NULL,
+    ProgramID int NULL,
+    StudentID int NULL,
+    SISStudentID int NULL,
+    EntryDate timestamp NULL,
+    PRIMARY KEY (SpecialProgramID)
+    );
+
+   
+    CREATE TABLE factStandardizedTestScore(
+    StandardizedTestScoreID int NOT NULL,
+    StudentID int NULL,
+    SISStudentID int NULL,
+    TestDate timestamp NULL,
+    SubjectID int NULL,
+    RawScore numeric(10, 2) NULL,
+    PossibleRawScore numeric(10, 2) NULL,
+    ScaledScore numeric(10, 2) NULL,
+    PossibleScaledScore numeric(10, 2) NULL,
+    PerformanceLevel numeric(10, 2) NULL,
+    Lexile varchar(50) NULL,
+    LatestTest int NULL,
+    PRIMARY KEY (StandardizedTestScoreID)
+    );
+
+   
+    CREATE TABLE factStudentCourse(
+    StudentCourseID int NOT NULL,
+    StudentID int NULL,
+    SISStudentID int NULL,
+    CourseID int NULL,
+    StaffID int NULL,
+    FacilityID int NULL,
+    PeriodID int NULL,
+    CourseDate timestamp NULL,
+    EnrollmentDate timestamp NULL,
+    EnrollmentCodeID int NULL,
+    WithdrawalDate timestamp NULL,
+    WithdrawalCodeID int NULL,
+    GradeLevel varchar(10) NULL,
+    PRIMARY KEY (StudentCourseID)
+    );
